@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>scrollAnim</title>
+    <link rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com-prettify.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.css">
+    <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.staticfile.org/prettify/r298/prettify.min.js"></script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.8/seed-min.js" data-config="{combine:true}"></script>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <div id="header"><a href="http://docs.kissyui.com/" class="logo">kissy</a>
+      <nav><a href="http://docs.kissyui.com/1.4/docs/html/coms.html">优秀组件推荐</a></nav>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar">
+          <ul data-spy="affix" data-offset-top="0" class="nav nav-list bs-docs-sidenav"></ul>
+        </div>
+        <div class="span9 bs-docs-content">
+          <h1 data-id="undefined" class="title">scrollAnim</h1>
+          <p class="author-wrapper"><span>组件有问题？旺旺联系作者：</span><a href="https://github.com/mohen" target="_blank" data-name="莫痕" class="author"><img src="https://avatars.githubusercontent.com/u/511153?v=2&amp;s=60" alt="莫痕"></a><span class="author-name">莫痕</span>
+          </p>
+          <div class="common-link"><a href="../demo/index.html" target="_blank" class="demo">示例</a><a href="https://github.com/kissygalleryteam/scrollAnim" target="_blank" class="source">源码</a></div>
+          <p class="com-info"><span class="info-label">View</span><span data-com="scrollAnim" class="J_View">916</span></p>
+          <p class="com-info"><span class="info-label">所属分类</span><a href="http://kpm.taobao.net/list/动画&amp;效果">动画&amp;效果</a><span class="info-label tag-label">组件标签</span><a href="http://kpm.taobao.net/list/tag?tag="></a>
+          </p>
+          <p class="com-info"><span class="info-label">kissy版本</span><span>1.4.X</span>
+          </p><h2 id="-">综述</h2>
+<p>当前版本：2.0.0
+作者：莫痕<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x79;&#x6f;&#110;&#x67;&#120;&#105;&#x6e;&#46;&#x6d;&#121;&#120;&#x40;&#97;&#108;&#105;&#x62;&#x61;&#98;&#97;&#45;&#x69;&#110;&#x63;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#x6f;&#110;&#x67;&#120;&#105;&#x6e;&#46;&#x6d;&#121;&#120;&#x40;&#97;&#108;&#105;&#x62;&#x61;&#98;&#97;&#45;&#x69;&#110;&#x63;&#46;&#x63;&#x6f;&#x6d;</a><br>scrollAnim是一个处理页面滚动时元素的动画效果的kg组件，可以用于视觉差等效果的场景中。该组件支持包括IE6在内的
+所有主流浏览器，使用方便。目前该组件支持KISSY1.3.0+。</p>
+<h2 id="-">快速使用示例</h2>
+<h3 id="-">初始化组件</h3>
+<pre><code>S.use(&#39;kg/scrollAnim/2.0.0/index&#39;, function (S, ScrollAnim) {
+     var scrollAnim = new ScrollAnim();
+});
+</code></pre><h3 id="-">使用示例</h3>
+<pre><code>S.use(&#39;kg/scrollAnim/2.0.0/index&#39;, function (S, ScrollAnim) {
+    //组件初始化
+    var scrollAnim = new ScrollAnim();
+    //分别调用smoothWheelScroll与smoothKeydownScroll方法，为鼠标滚动与键盘上下键滚动添加平滑处理
+    scrollAnim.smoothWheelScroll(1.5);
+    scrollAnim.smoothKeydownScroll(1.5);
+    //调用scrollLineAnim方法，使‘#J_move1’这个元素的left属性在scroll值为0~500的范围内从200线性变化到600
+    scrollAnim.scrollLineAnim(&#39;#J_move1&#39;, &#39;left&#39;, {
+        start_scroll: 0,
+        end_scroll: 500,
+        start_value: 200,
+        end_value: 600,
+        isCallbackLoop: false,
+        isAnimLoop: false,
+        isMidCallLoop: false,
+        midCall: {
+            400: function(){alert(&#39;haha&#39;);}
+        }
+    }, function(){alert(&#39;hi&#39;)});
+});
+</code></pre><h2 id="demo">Demo</h2>
+<p>Demo地址:<a href="http://kg.kissyui.com/scrollAnim/2.0.0/demo/index.html">http://kg.kissyui.com/scrollAnim/2.0.0/demo/index.html</a></p>
+<h2 id="api-">API说明</h2>
+<p>smoothWheelScroll（speed）<br>该方法为鼠标的滚轮事件添加平滑处理，一般在滚动视觉动画中均需要先做该平滑处理。<br>需要传入一个滚动速度的参数，其取值要求在1到3之间（包含1和3），取值最好为1、1.5、2、2.5和3。取值越大滚动速度越快。<br>smoothKeydownScroll (speed)<br>该方法为键盘的上下按键添加平滑处理，一般在滚动视觉动画中均需要先做该平滑处理。<br>需要传入一个滚动速度的参数，其取值要求在1到3之间（包含1和3），取值最好为1、1.5、2、2.5和3。取值越大滚动速度越快。<br>scrollLineAnim (selector, attr, config[, callback])<br>该方法为元素加上滚动动画效果。<br>需要传入的参数依次为：<br>第一个参数selector为元素选择器（同Kissy的选择器）；<br>第二个参数attr为希望在滚动过程中变化的该元素的某个属性（注意这个属性一定要在CSS中出现，且不支持百分比数值的变化）；<br>第三个参数config为一个json，该json中包含的项目有：<br>1、start_scroll : 希望触发元素参数变化的scroll值的起始值，必选<br>2、end_scroll : 希望触发元素参数变化的scroll值的终点值，必选<br>3、start_value : 希望该元素的属性在该滚动范围内变化的起始值，必选<br>4、end_value : 希望该元素的属性在该滚动范围内变化的终点值，必选<br>5、isCallbackLoop : 该属性用来设置是否允许回调函数当再次滚到特定位置时再次触发，默认为true。可选<br>6、isAnimLoop : 该属性用来设置该动画是否允许循环发生（当设置为false时触发回调函数后该动画不再发生），默认为true。可选<br>7、midCall : 其值为一个对象，该对象的结构如下<br>    midCall: {
+        300: function(){},
+        400: function(){}
+    }
+这表示当指定的属性值达到300和400时将分别触发后面的函数。可选<br>8、isMidCallLoop : 该属性用来设置动画中间触发的动画是否允许重复触发，默认为false。可选<br>最后一个参数callback为当元素到达end_scroll时的回调函数。</p>
+
+          <div style="display:none;"><script type="text/javascript" src="http://tajs.qq.com/stats?sId=36378479" charset="UTF-8"></script></div>
+          <script src="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
